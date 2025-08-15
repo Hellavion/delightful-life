@@ -6,13 +6,13 @@ const activeTab = ref('home');
 
 const tabs = [
   { id: 'home', label: 'Главная', icon: '🏠' },
-  { id: 'portfolio', label: 'Портфолио', icon: '💼' },
-  { id: 'about', label: 'О себе', icon: '👤' }
+  { id: 'portfolio', label: 'Портфолио', icon: '🎨' },
+  { id: 'about', label: 'О себе', icon: '👩‍🎨' }
 ];
 </script>
 
 <template>
-  <Head title="Delightful Life">
+  <Head title="Delightful Life - Художница и дизайнер">
     <link rel="preconnect" href="https://rsms.me/" />
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
   </Head>
@@ -74,11 +74,11 @@ const tabs = [
         <div v-if="activeTab === 'home'" class="p-8 lg:p-12">
           <div class="text-center mb-12">
             <h2 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
-              Добро пожаловать в Delightful Life
+              Добро пожаловать в мир искусства
             </h2>
             <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Создаем прекрасные цифровые решения, которые делают жизнь лучше. 
-              От веб-приложений до мобильных решений - мы воплощаем ваши идеи в реальность.
+              Привет! Я художница и дизайнер, создающая уникальные произведения искусства. 
+              От живописи до цифрового дизайна - каждая работа несет частичку души и вдохновения.
             </p>
           </div>
 
@@ -87,24 +87,24 @@ const tabs = [
               <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <span class="text-2xl">🎨</span>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Креативный дизайн</h3>
-              <p class="text-gray-600 dark:text-gray-300">Создаем уникальные и привлекательные интерфейсы</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Живопись</h3>
+              <p class="text-gray-600 dark:text-gray-300">Акварель, масло, акрил - создаю картины, которые оживают</p>
             </div>
 
             <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20">
               <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span class="text-2xl">⚡</span>
+                <span class="text-2xl">💻</span>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Современные технологии</h3>
-              <p class="text-gray-600 dark:text-gray-300">Используем последние технологии для лучших результатов</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Цифровой дизайн</h3>
+              <p class="text-gray-600 dark:text-gray-300">Логотипы, иллюстрации, веб-дизайн с креативным подходом</p>
             </div>
 
             <div class="text-center p-6 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
               <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span class="text-2xl">🚀</span>
+                <span class="text-2xl">✨</span>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Быстрая разработка</h3>
-              <p class="text-gray-600 dark:text-gray-300">Эффективно доставляем проекты в срок</p>
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Уникальный стиль</h3>
+              <p class="text-gray-600 dark:text-gray-300">Каждая работа отражает мое видение красоты и гармонии</p>
             </div>
           </div>
         </div>
@@ -113,52 +113,52 @@ const tabs = [
         <div v-if="activeTab === 'portfolio'" class="p-8 lg:p-12">
           <div class="text-center mb-12">
             <h2 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
-              Наши проекты
+              Мои работы
             </h2>
             <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Посмотрите на наши лучшие работы и убедитесь в качестве наших решений
+              Портфолио моих лучших работ - от традиционной живописи до современного дизайна
             </p>
           </div>
 
           <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20">
               <div class="aspect-video bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-                <span class="text-4xl">📱</span>
+                <span class="text-4xl">🌺</span>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Мобильное приложение</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">Современное приложение для управления задачами</p>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Акварельные цветы</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Серия картин с нежными цветочными мотивами</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm">React Native</span>
-                  <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">Node.js</span>
+                  <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm">Акварель</span>
+                  <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">Цветы</span>
                 </div>
               </div>
             </div>
 
             <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900/20 dark:to-cyan-900/20">
               <div class="aspect-video bg-gradient-to-br from-blue-400 to-cyan-400 flex items-center justify-center">
-                <span class="text-4xl">💻</span>
+                <span class="text-4xl">🏢</span>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Веб-платформа</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">E-commerce платформа с современным дизайном</p>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Логотипы компаний</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Корпоративная идентичность для бизнеса</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">Vue.js</span>
-                  <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm">Laravel</span>
+                  <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">Логотипы</span>
+                  <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded-full text-sm">Брендинг</span>
                 </div>
               </div>
             </div>
 
             <div class="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20">
               <div class="aspect-video bg-gradient-to-br from-green-400 to-emerald-400 flex items-center justify-center">
-                <span class="text-4xl">🎯</span>
+                <span class="text-4xl">🌅</span>
               </div>
               <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Аналитическая система</h3>
-                <p class="text-gray-600 dark:text-gray-300 mb-4">Система аналитики с интерактивными дашбордами</p>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Пейзажи</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Масляная живопись с природными мотивами</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm">React</span>
-                  <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">Python</span>
+                  <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm">Масло</span>
+                  <span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">Пейзажи</span>
                 </div>
               </div>
             </div>
@@ -169,55 +169,55 @@ const tabs = [
         <div v-if="activeTab === 'about'" class="p-8 lg:p-12">
           <div class="text-center mb-12">
             <h2 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-6">
-              О нас
+              О художнице
             </h2>
             <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Узнайте больше о нашей команде и подходе к разработке
+              Узнайте больше о моем творческом пути и вдохновении
             </p>
           </div>
 
           <div class="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Наша миссия
+                Мой творческий путь
               </h3>
               <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                Мы создаем цифровые решения, которые не только решают технические задачи, 
-                но и приносят радость пользователям. Каждый проект для нас - это возможность 
-                сделать мир немного лучше.
+                С детства я была влюблена в искусство. Каждый мазок кисти, каждая линия карандаша 
+                для меня - это способ выразить красоту мира и поделиться своими эмоциями с другими.
               </p>
               <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                Наша команда объединяет опытных разработчиков, дизайнеров и менеджеров проектов, 
-                которые работают вместе для достижения выдающихся результатов.
+                Я работаю в разных техниках и стилях, постоянно экспериментирую и развиваюсь. 
+                От традиционной живописи до современного цифрового искусства - каждый проект 
+                для меня особенный и уникальный.
               </p>
 
               <div class="grid grid-cols-2 gap-6">
                 <div class="text-center">
-                  <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">50+</div>
-                  <div class="text-gray-600 dark:text-gray-300">Завершенных проектов</div>
+                  <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">100+</div>
+                  <div class="text-gray-600 dark:text-gray-300">Завершенных работ</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-3xl font-bold text-pink-600 dark:text-pink-400">5+</div>
-                  <div class="text-gray-600 dark:text-gray-300">Лет опыта</div>
+                  <div class="text-3xl font-bold text-pink-600 dark:text-pink-400">8+</div>
+                  <div class="text-gray-600 dark:text-gray-300">Лет творчества</div>
                 </div>
               </div>
             </div>
 
             <div class="space-y-6">
               <div class="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
-                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Наши ценности</h4>
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Мои принципы</h4>
                 <ul class="space-y-2 text-gray-600 dark:text-gray-300">
                   <li class="flex items-center">
                     <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                    Качество превыше всего
+                    Качество превыше количества
                   </li>
                   <li class="flex items-center">
                     <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
-                    Инновации в каждой детали
+                    Каждая работа уникальна
                   </li>
                   <li class="flex items-center">
                     <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                    Клиент всегда прав
+                    Вдохновение в деталях
                   </li>
                   <li class="flex items-center">
                     <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
@@ -227,12 +227,12 @@ const tabs = [
               </div>
 
               <div class="p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20">
-                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Технологии</h4>
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Техники</h4>
                 <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">Vue.js</span>
-                  <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm">Laravel</span>
-                  <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">React</span>
-                  <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm">Node.js</span>
+                  <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">Акварель</span>
+                  <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm">Масло</span>
+                  <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">Акрил</span>
+                  <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm">Цифровая живопись</span>
                 </div>
               </div>
             </div>
