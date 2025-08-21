@@ -4,11 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактировать: {{ $artwork->title }} - Административная панель</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .alert { @apply px-4 py-3 rounded-md mb-4; }
-        .alert-error { @apply bg-red-100 border border-red-400 text-red-700; }
-    </style>
+    @vite(['resources/css/admin/base.css'])
 </head>
 <body class="bg-gray-100 min-h-screen">
     <!-- Header -->
