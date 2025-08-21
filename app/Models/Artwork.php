@@ -15,15 +15,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $title
  * @property string|null $description  
  * @property string $slug
- * @property string|null $medium
- * @property string|null $dimensions
- * @property int|null $year_created
+ * @property string $technique
+ * @property int $year
+ * @property float|null $width
+ * @property float|null $height
  * @property float|null $price
  * @property bool $is_featured
- * @property bool $is_sold
- * @property bool $is_available_for_print
- * @property array|null $tags
- * @property int $sort_order
+ * @property bool $is_available
+ * @property string|null $image_path
  */
 class Artwork extends Model
 {
@@ -33,22 +32,19 @@ class Artwork extends Model
         'title',
         'description',
         'slug',
-        'medium',
-        'dimensions',
-        'year_created',
+        'technique',
+        'year',
+        'width',
+        'height',
         'price',
         'is_featured',
-        'is_sold',
-        'is_available_for_print',
-        'tags',
-        'sort_order',
+        'is_available',
+        'image_path',
     ];
 
     protected $casts = [
-        'tags' => 'array',
         'is_featured' => 'boolean',
-        'is_sold' => 'boolean',
-        'is_available_for_print' => 'boolean',
+        'is_available' => 'boolean',
         'price' => 'decimal:2',
     ];
 
