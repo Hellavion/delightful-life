@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Административная панель - Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/admin/base.css'])
 </head>
 <body class="bg-gray-100 min-h-screen">
     <div class="bg-white shadow-sm border-b">
