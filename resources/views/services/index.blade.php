@@ -15,7 +15,7 @@
                     <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Главная</a>
                     <a href="{{ route('portfolio.index') }}" class="text-gray-700 hover:text-indigo-600">Портфолио</a>
                     <a href="{{ route('services.index') }}" class="text-indigo-600 font-semibold">Услуги</a>
-                    <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-indigo-600">Блог</a>
+                    <a href="{{ route('blog.index') }}" class="text-gray-700 hover:text-indigo-600">Новости</a>
                     <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-indigo-600">Контакты</a>
                 </nav>
             </div>
