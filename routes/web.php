@@ -40,3 +40,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Административные маршруты
+Route::prefix('admin')->group(base_path('routes/admin.php'));
