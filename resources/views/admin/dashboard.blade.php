@@ -57,9 +57,9 @@
                         <div class="bg-white p-6 rounded-lg shadow-sm border">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">Услуги</h3>
                             <p class="text-gray-600 text-sm mb-4">Управление услугами и ценами</p>
-                            <button class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-200" disabled>
-                                В разработке
-                            </button>
+                            <a href="{{ route('admin.services.index') }}" class="inline-block bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-200">
+                                Управлять услугами
+                            </a>
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-sm border">

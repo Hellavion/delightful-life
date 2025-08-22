@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ArtworkController;
+use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,11 @@ Route::middleware('admin')->group(function () {
     // Дополнительные маршруты для произведений
     Route::patch('/artworks/{artwork}/toggle-featured', [ArtworkController::class, 'toggleFeatured'])->name('admin.artworks.toggle-featured');
     Route::patch('/artworks/{artwork}/toggle-availability', [ArtworkController::class, 'toggleAvailability'])->name('admin.artworks.toggle-availability');
+
+    // Управление услугами
+    Route::resource('services', ServiceController::class, ['as' => 'admin']);
+    
+    // Дополнительные маршруты для услуг
+    Route::patch('/services/{service}/toggle-active', [ServiceController::class, 'toggleActive'])->name('admin.services.toggle-active');
+    Route::post('/services/update-order', [ServiceController::class, 'updateOrder'])->name('admin.services.update-order');
 });
