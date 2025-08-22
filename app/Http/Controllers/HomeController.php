@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artwork;
-use App\Models\BlogPost;
+use App\Models\News;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 /**
  * Контроллер главной страницы
@@ -34,15 +33,15 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        // Последние записи блога
-        $latestPosts = BlogPost::published()
+        // Последние новости
+        $latestPosts = News::published()
             ->orderBy('published_at', 'desc')
             ->limit(3)
             ->get();
 
         return view('home', compact(
             'featuredArtworks',
-            'latestArtworks', 
+            'latestArtworks',
             'services',
             'latestPosts'
         ));

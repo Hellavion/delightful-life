@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Service;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ServiceSeeder extends Seeder
@@ -28,7 +27,7 @@ class ServiceSeeder extends Seeder
                     'Несколько вариантов эскизов',
                     'Поэтапное согласование',
                     'Профессиональное оформление',
-                    'Сертификат подлинности'
+                    'Сертификат подлинности',
                 ],
                 'is_active' => true,
                 'sort_order' => 1,
@@ -47,7 +46,7 @@ class ServiceSeeder extends Seeder
                     'Концепт-арт и наброски',
                     'Цветовые эскизы',
                     'Итоговые иллюстрации',
-                    'Файлы в высоком разрешении для печати'
+                    'Файлы в высоком разрешении для печати',
                 ],
                 'is_active' => true,
                 'sort_order' => 2,
@@ -66,7 +65,7 @@ class ServiceSeeder extends Seeder
                     'Несколько вариантов концепции',
                     'Файлы в разных форматах',
                     'Брендбук и гайдлайны',
-                    'Консультации по применению'
+                    'Консультации по применению',
                 ],
                 'is_active' => true,
                 'sort_order' => 3,
@@ -83,7 +82,7 @@ class ServiceSeeder extends Seeder
                     'Выезд на натуру (в городе)',
                     'Композиционные эскизы',
                     'Профессиональные материалы',
-                    'Оформление в раму'
+                    'Оформление в раму',
                 ],
                 'is_active' => true,
                 'sort_order' => 4,
@@ -101,7 +100,7 @@ class ServiceSeeder extends Seeder
                     'Проработка персонажей',
                     'Яркие и безопасные цвета',
                     'Психологически комфортные образы',
-                    'Файлы для печати и цифрового использования'
+                    'Файлы для печати и цифрового использования',
                 ],
                 'is_active' => true,
                 'sort_order' => 5,
@@ -118,7 +117,7 @@ class ServiceSeeder extends Seeder
                     'Множественные варианты',
                     'Детальная проработка',
                     'Техническая документация',
-                    'Консультации по реализации'
+                    'Консультации по реализации',
                 ],
                 'is_active' => true,
                 'sort_order' => 6,
@@ -134,7 +133,7 @@ class ServiceSeeder extends Seeder
                     'Индивидуальный подход',
                     'Все материалы включены',
                     'Готовая работа с собой',
-                    'Методические материалы'
+                    'Методические материалы',
                 ],
                 'is_active' => false,
                 'sort_order' => 7,

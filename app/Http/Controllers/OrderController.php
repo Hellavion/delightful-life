@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Service;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Validation\Rule;
 
 /**
  * Контроллер для публичного создания заказов
@@ -50,7 +49,7 @@ class OrderController extends Controller
         // Получаем базовую цену услуги
         $service = Service::findOrFail($validated['service_id']);
         $validated['price'] = $service->price_from ?? 0;
-        
+
         // Автоматические значения для публичного заказа
         $validated['order_number'] = $this->generateOrderNumber();
         $validated['status'] = 'pending';
@@ -92,7 +91,7 @@ class OrderController extends Controller
                 ->with('service')
                 ->first();
 
-            if (!$order) {
+            if (! $order) {
                 $errorMessage = 'Заказ с таким номером не найден';
             }
         }
@@ -106,7 +105,7 @@ class OrderController extends Controller
     private function generateOrderNumber(): string
     {
         do {
-            $number = 'ORD-' . date('Y') . '-' . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
+            $number = 'ORD-'.date('Y').'-'.str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
         } while (Order::where('order_number', $number)->exists());
 
         return $number;

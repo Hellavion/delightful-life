@@ -36,20 +36,20 @@ class AdminAuthController extends Controller
 
         $admin = Admin::where('email', $credentials['email'])->first();
 
-        if (!$admin || !Hash::check($credentials['password'], $admin->password)) {
+        if (! $admin || ! Hash::check($credentials['password'], $admin->password)) {
             throw ValidationException::withMessages([
                 'email' => ['Неверные учетные данные.'],
             ]);
         }
 
-        if (!$admin->isActive()) {
+        if (! $admin->isActive()) {
             throw ValidationException::withMessages([
                 'email' => ['Учетная запись администратора деактивирована.'],
             ]);
         }
 
         Auth::guard('admin')->login($admin, $request->boolean('remember'));
-        
+
         $admin->updateLastLogin();
 
         $request->session()->regenerate();

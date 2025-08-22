@@ -15,13 +15,13 @@ return new class extends Migration
             // Переименование и добавление новых колонок
             $table->renameColumn('medium', 'technique');
             $table->renameColumn('year_created', 'year');
-            
+
             // Добавление новых колонок
             $table->decimal('width', 8, 2)->nullable()->after('technique');
             $table->decimal('height', 8, 2)->nullable()->after('width');
             $table->boolean('is_available')->default(true)->after('is_featured');
             $table->string('image_path')->nullable()->after('slug');
-            
+
             // Удаление неиспользуемых колонок
             $table->dropColumn(['dimensions', 'is_sold', 'is_available_for_print', 'tags', 'sort_order']);
         });
@@ -36,10 +36,10 @@ return new class extends Migration
             // Возврат обратно
             $table->renameColumn('technique', 'medium');
             $table->renameColumn('year', 'year_created');
-            
+
             // Удаление добавленных колонок
             $table->dropColumn(['width', 'height', 'is_available', 'image_path']);
-            
+
             // Возврат удаленных колонок
             $table->string('dimensions')->nullable();
             $table->boolean('is_sold')->default(false);
