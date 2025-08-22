@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Artwork;
 use App\Models\Category;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 /**
@@ -20,7 +19,7 @@ class ArtworkSeeder extends Seeder
         $artworks = [
             [
                 'title' => 'Закат над морем',
-                'slug' => 'zakat-nad-morem-' . now()->timestamp,
+                'slug' => 'zakat-nad-morem-'.now()->timestamp,
                 'description' => 'Прекрасный закат над морем, выполненный в импрессионистическом стиле.',
                 'technique' => 'Масло на холсте',
                 'year' => 2023,
@@ -29,11 +28,11 @@ class ArtworkSeeder extends Seeder
                 'price' => 25000,
                 'is_available' => true,
                 'is_featured' => true,
-                'categories' => ['Живопись']
+                'categories' => ['Живопись'],
             ],
             [
                 'title' => 'Портрет девушки',
-                'slug' => 'portret-devushki-' . now()->timestamp,
+                'slug' => 'portret-devushki-'.now()->timestamp,
                 'description' => 'Реалистичный портрет молодой девушки.',
                 'technique' => 'Акрил на холсте',
                 'year' => 2023,
@@ -42,11 +41,11 @@ class ArtworkSeeder extends Seeder
                 'price' => 30000,
                 'is_available' => true,
                 'is_featured' => false,
-                'categories' => ['Живопись', 'Портреты']
+                'categories' => ['Живопись', 'Портреты'],
             ],
             [
                 'title' => 'Горный пейзаж',
-                'slug' => 'gornyj-pejzazh-' . now()->timestamp,
+                'slug' => 'gornyj-pejzazh-'.now()->timestamp,
                 'description' => 'Величественные горы в утреннем тумане.',
                 'technique' => 'Акварель',
                 'year' => 2022,
@@ -55,11 +54,11 @@ class ArtworkSeeder extends Seeder
                 'price' => 15000,
                 'is_available' => true,
                 'is_featured' => true,
-                'categories' => ['Живопись', 'Пейзажи']
+                'categories' => ['Живопись', 'Пейзажи'],
             ],
             [
                 'title' => 'Абстрактная композиция',
-                'slug' => 'abstraktnaya-kompoziciya-' . now()->timestamp,
+                'slug' => 'abstraktnaya-kompoziciya-'.now()->timestamp,
                 'description' => 'Современная абстрактная работа с яркими цветами.',
                 'technique' => 'Смешанная техника',
                 'year' => 2024,
@@ -68,11 +67,11 @@ class ArtworkSeeder extends Seeder
                 'price' => 45000,
                 'is_available' => false,
                 'is_featured' => false,
-                'categories' => ['Живопись', 'Абстракция']
+                'categories' => ['Живопись', 'Абстракция'],
             ],
             [
                 'title' => 'Иллюстрация к сказке',
-                'slug' => 'illyustraciya-k-skazke-' . now()->timestamp,
+                'slug' => 'illyustraciya-k-skazke-'.now()->timestamp,
                 'description' => 'Детская иллюстрация для книги сказок.',
                 'technique' => 'Цифровая живопись',
                 'year' => 2023,
@@ -81,16 +80,16 @@ class ArtworkSeeder extends Seeder
                 'price' => 8000,
                 'is_available' => true,
                 'is_featured' => false,
-                'categories' => ['Иллюстрация']
-            ]
+                'categories' => ['Иллюстрация'],
+            ],
         ];
 
         foreach ($artworks as $artworkData) {
             $categories = $artworkData['categories'];
             unset($artworkData['categories']);
-            
+
             $artwork = Artwork::create($artworkData);
-            
+
             // Привязка категорий
             foreach ($categories as $categoryName) {
                 $category = Category::where('name', $categoryName)->first();

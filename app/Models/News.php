@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
 // use Spatie\MediaLibrary\HasMedia;
 // use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
- * Модель записи блога
- * 
+ * Модель новости
+ *
  * @property int $id
  * @property string $title
  * @property string $slug
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string|null $seo_description
  * @property \Carbon\Carbon|null $published_at
  */
-class BlogPost extends Model
+class News extends Model
 {
     use HasFactory;
 
@@ -49,17 +50,17 @@ class BlogPost extends Model
     ];
 
     /**
-     * Scope для опубликованных постов
+     * Scope для опубликованных новостей
      */
     public function scopePublished($query)
     {
         return $query->where('is_published', true)
-                    ->whereNotNull('published_at')
-                    ->where('published_at', '<=', now());
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 
     /**
-     * Scope для рекомендуемых постов
+     * Scope для рекомендуемых новостей
      */
     public function scopeFeatured($query)
     {

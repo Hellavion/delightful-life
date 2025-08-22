@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -20,9 +20,9 @@ Route::get('/portfolio/{artwork:slug}', [PortfolioController::class, 'show'])->n
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/services/{service:slug}', [ServiceController::class, 'show'])->name('services.show');
 
-// Блог
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+// Новости
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{post:slug}', [NewsController::class, 'show'])->name('news.show');
 
 // Контакты
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

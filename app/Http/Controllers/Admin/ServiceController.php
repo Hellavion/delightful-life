@@ -34,7 +34,7 @@ class ServiceController extends Controller
         $pricingTypes = [
             'fixed' => 'Фиксированная цена',
             'range' => 'Диапазон цен',
-            'custom' => 'Индивидуально'
+            'custom' => 'Индивидуально',
         ];
 
         return view('admin.services.create', compact('pricingTypes'));
@@ -57,7 +57,7 @@ class ServiceController extends Controller
             'features' => 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'is_active' => 'nullable|string',
-            'sort_order' => 'nullable|integer|min:0'
+            'sort_order' => 'nullable|integer|min:0',
         ]);
 
         // Генерация slug если не указан
@@ -69,14 +69,14 @@ class ServiceController extends Controller
         $originalSlug = $validated['slug'];
         $counter = 1;
         while (Service::where('slug', $validated['slug'])->exists()) {
-            $validated['slug'] = $originalSlug . '-' . $counter;
+            $validated['slug'] = $originalSlug.'-'.$counter;
             $counter++;
         }
 
         // Фильтрация пустых элементов массива features
         if (isset($validated['features'])) {
-            $validated['features'] = array_filter($validated['features'], function($feature) {
-                return $feature !== null && !empty(trim($feature));
+            $validated['features'] = array_filter($validated['features'], function ($feature) {
+                return $feature !== null && ! empty(trim($feature));
             });
             // Если массив features пустой после фильтрации, устанавливаем null
             if (empty($validated['features'])) {
@@ -91,7 +91,7 @@ class ServiceController extends Controller
         $service = Service::create($validated);
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услуга "' . $service->name . '" успешно создана.');
+            ->with('success', 'Услуга "'.$service->name.'" успешно создана.');
     }
 
     /**
@@ -110,7 +110,7 @@ class ServiceController extends Controller
         $pricingTypes = [
             'fixed' => 'Фиксированная цена',
             'range' => 'Диапазон цен',
-            'custom' => 'Индивидуально'
+            'custom' => 'Индивидуально',
         ];
 
         return view('admin.services.edit', compact('service', 'pricingTypes'));
@@ -127,7 +127,7 @@ class ServiceController extends Controller
                 'nullable',
                 'string',
                 'max:255',
-                Rule::unique('services', 'slug')->ignore($service->id)
+                Rule::unique('services', 'slug')->ignore($service->id),
             ],
             'description' => 'required|string',
             'process_description' => 'nullable|string',
@@ -138,7 +138,7 @@ class ServiceController extends Controller
             'features' => 'nullable|array',
             'features.*' => 'nullable|string|max:255',
             'is_active' => 'nullable|string',
-            'sort_order' => 'nullable|integer|min:0'
+            'sort_order' => 'nullable|integer|min:0',
         ]);
 
         // Генерация slug если не указан
@@ -150,14 +150,14 @@ class ServiceController extends Controller
         $originalSlug = $validated['slug'];
         $counter = 1;
         while (Service::where('slug', $validated['slug'])->where('id', '!=', $service->id)->exists()) {
-            $validated['slug'] = $originalSlug . '-' . $counter;
+            $validated['slug'] = $originalSlug.'-'.$counter;
             $counter++;
         }
 
         // Фильтрация пустых элементов массива features
         if (isset($validated['features'])) {
-            $validated['features'] = array_filter($validated['features'], function($feature) {
-                return $feature !== null && !empty(trim($feature));
+            $validated['features'] = array_filter($validated['features'], function ($feature) {
+                return $feature !== null && ! empty(trim($feature));
             });
             // Если массив features пустой после фильтрации, устанавливаем null
             if (empty($validated['features'])) {
@@ -172,7 +172,7 @@ class ServiceController extends Controller
         $service->update($validated);
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услуга "' . $service->name . '" успешно обновлена.');
+            ->with('success', 'Услуга "'.$service->name.'" успешно обновлена.');
     }
 
     /**
@@ -181,17 +181,17 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         $serviceName = $service->name;
-        
+
         // Проверяем, есть ли связанные заказы
         if ($service->orders()->exists()) {
             return redirect()->route('admin.services.index')
-                ->with('error', 'Невозможно удалить услугу "' . $serviceName . '", так как с ней связаны заказы.');
+                ->with('error', 'Невозможно удалить услугу "'.$serviceName.'", так как с ней связаны заказы.');
         }
 
         $service->delete();
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услуга "' . $serviceName . '" успешно удалена.');
+            ->with('success', 'Услуга "'.$serviceName.'" успешно удалена.');
     }
 
     /**
@@ -199,12 +199,12 @@ class ServiceController extends Controller
      */
     public function toggleActive(Service $service)
     {
-        $service->update(['is_active' => !$service->is_active]);
+        $service->update(['is_active' => ! $service->is_active]);
 
         $status = $service->is_active ? 'активирована' : 'деактивирована';
-        
+
         return redirect()->back()
-            ->with('success', 'Услуга "' . $service->name . '" ' . $status . '.');
+            ->with('success', 'Услуга "'.$service->name.'" '.$status.'.');
     }
 
     /**
@@ -215,7 +215,7 @@ class ServiceController extends Controller
         $request->validate([
             'services' => 'required|array',
             'services.*.id' => 'required|exists:services,id',
-            'services.*.sort_order' => 'required|integer|min:0'
+            'services.*.sort_order' => 'required|integer|min:0',
         ]);
 
         foreach ($request->services as $serviceData) {

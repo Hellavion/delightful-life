@@ -32,7 +32,7 @@ class ArtworkController extends Controller
 
         // Поиск по названию
         if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%');
+            $query->where('title', 'like', '%'.$request->search.'%');
         }
 
         $artworks = $query->latest()->paginate(12);
@@ -47,6 +47,7 @@ class ArtworkController extends Controller
     public function create(): View
     {
         $categories = Category::all();
+
         return view('admin.artworks.create', compact('categories'));
     }
 
@@ -59,7 +60,7 @@ class ArtworkController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'technique' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'year' => 'required|integer|min:1900|max:'.(date('Y') + 1),
             'width' => 'nullable|numeric|min:0',
             'height' => 'nullable|numeric|min:0',
             'price' => 'nullable|numeric|min:0',
@@ -73,7 +74,7 @@ class ArtworkController extends Controller
         $validated['is_featured'] = $request->has('is_featured');
 
         // Генерация slug
-        $validated['slug'] = Str::slug($validated['title']) . '-' . Str::random(6);
+        $validated['slug'] = Str::slug($validated['title']).'-'.Str::random(6);
 
         // Загрузка изображения
         if ($request->hasFile('image')) {
@@ -97,6 +98,7 @@ class ArtworkController extends Controller
     public function show(Artwork $artwork): View
     {
         $artwork->load('categories');
+
         return view('admin.artworks.show', compact('artwork'));
     }
 
@@ -107,6 +109,7 @@ class ArtworkController extends Controller
     {
         $categories = Category::all();
         $artwork->load('categories');
+
         return view('admin.artworks.edit', compact('artwork', 'categories'));
     }
 
@@ -119,7 +122,7 @@ class ArtworkController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'technique' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'year' => 'required|integer|min:1900|max:'.(date('Y') + 1),
             'width' => 'nullable|numeric|min:0',
             'height' => 'nullable|numeric|min:0',
             'price' => 'nullable|numeric|min:0',
@@ -134,7 +137,7 @@ class ArtworkController extends Controller
 
         // Обновление slug если изменился title
         if ($artwork->title !== $validated['title']) {
-            $validated['slug'] = Str::slug($validated['title']) . '-' . Str::random(6);
+            $validated['slug'] = Str::slug($validated['title']).'-'.Str::random(6);
         }
 
         // Загрузка нового изображения
@@ -178,12 +181,12 @@ class ArtworkController extends Controller
      */
     public function toggleFeatured(Artwork $artwork): RedirectResponse
     {
-        $newStatus = !$artwork->is_featured;
+        $newStatus = ! $artwork->is_featured;
         $artwork->update(['is_featured' => $newStatus]);
         $artwork->refresh(); // Принудительно обновляем модель из БД
 
         $status = $newStatus ? 'добавлено в избранные' : 'убрано из избранных';
-        
+
         return redirect()->route('admin.artworks.index')
             ->with('success', "Произведение {$status}!");
     }
@@ -193,12 +196,12 @@ class ArtworkController extends Controller
      */
     public function toggleAvailability(Artwork $artwork): RedirectResponse
     {
-        $newStatus = !$artwork->is_available;
+        $newStatus = ! $artwork->is_available;
         $artwork->update(['is_available' => $newStatus]);
         $artwork->refresh(); // Принудительно обновляем модель из БД
 
         $status = $newStatus ? 'помечено как доступное' : 'помечено как недоступное';
-        
+
         return redirect()->route('admin.artworks.index')
             ->with('success', "Произведение {$status}!");
     }

@@ -32,9 +32,9 @@ class PortfolioController extends Controller
         // Поиск
         if ($request->has('search') && $request->search) {
             $query->where(function ($q) use ($request) {
-                $q->where('title', 'like', '%' . $request->search . '%')
-                  ->orWhere('description', 'like', '%' . $request->search . '%')
-                  ->orWhere('medium', 'like', '%' . $request->search . '%');
+                $q->where('title', 'like', '%'.$request->search.'%')
+                    ->orWhere('description', 'like', '%'.$request->search.'%')
+                    ->orWhere('medium', 'like', '%'.$request->search.'%');
             });
         }
 
@@ -53,9 +53,9 @@ class PortfolioController extends Controller
         $relatedArtworks = Artwork::whereHas('categories', function ($query) use ($artwork) {
             $query->whereIn('categories.id', $artwork->categories->pluck('id'));
         })
-        ->where('id', '!=', $artwork->id)
-        ->limit(4)
-        ->get();
+            ->where('id', '!=', $artwork->id)
+            ->limit(4)
+            ->get();
 
         return view('portfolio.show', compact('artwork', 'relatedArtworks'));
     }
