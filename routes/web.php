@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BlogController;
@@ -26,6 +27,12 @@ Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.sho
 // Контакты
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Заказы
+Route::get('/order', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/order/success/{order}', [OrderController::class, 'success'])->name('orders.success');
+Route::get('/order/status', [OrderController::class, 'status'])->name('orders.status');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
