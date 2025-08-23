@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,4 +67,8 @@ Route::middleware('admin')->group(function () {
     Route::patch('/contacts/{contact}/update-notes', [ContactController::class, 'updateNotes'])->name('admin.contacts.update-notes');
     Route::post('/contacts/bulk-action', [ContactController::class, 'bulkAction'])->name('admin.contacts.bulk-action');
     Route::post('/contacts/{contact}/create-order', [ContactController::class, 'createOrderFromContact'])->name('admin.contacts.create-order');
+
+    // Управление настройками сайта
+    Route::get('/settings', [SettingsController::class, 'index'])->name('admin.settings.index');
+    Route::put('/settings', [SettingsController::class, 'update'])->name('admin.settings.update');
 });
