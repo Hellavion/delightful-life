@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ArtworkController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -54,4 +55,15 @@ Route::middleware('admin')->group(function () {
 
     // Управление новостями
     Route::resource('news', NewsController::class, ['as' => 'admin']);
+
+    // Управление обращениями клиентов
+    Route::resource('contacts', ContactController::class, ['as' => 'admin'])
+        ->except(['create', 'store', 'edit', 'update']);
+
+    // Дополнительные маршруты для обращений
+    Route::patch('/contacts/{contact}/toggle-read', [ContactController::class, 'toggleRead'])->name('admin.contacts.toggle-read');
+    Route::patch('/contacts/{contact}/toggle-replied', [ContactController::class, 'toggleReplied'])->name('admin.contacts.toggle-replied');
+    Route::patch('/contacts/{contact}/update-notes', [ContactController::class, 'updateNotes'])->name('admin.contacts.update-notes');
+    Route::post('/contacts/bulk-action', [ContactController::class, 'bulkAction'])->name('admin.contacts.bulk-action');
+    Route::post('/contacts/{contact}/create-order', [ContactController::class, 'createOrderFromContact'])->name('admin.contacts.create-order');
 });
