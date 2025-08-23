@@ -82,9 +82,10 @@
                         <div class="bg-white p-6 rounded-lg shadow-sm border">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">Контакты</h3>
                             <p class="text-gray-600 text-sm mb-4">Обработка обращений клиентов</p>
-                            <button class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-200" disabled>
-                                В разработке
-                            </button>
+                            <a href="{{ route('admin.contacts.index') }}" 
+                               class="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition duration-200 inline-block">
+                                Управлять обращениями
+                            </a>
                         </div>
 
                         <div class="bg-white p-6 rounded-lg shadow-sm border">

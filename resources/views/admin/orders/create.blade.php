@@ -43,12 +43,36 @@
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">Создание заказа</h1>
-                <p class="mt-2 text-gray-600">Добавление нового заказа в систему</p>
+                <p class="mt-2 text-gray-600">
+                    @if(session('contact_data'))
+                        Создание заказа на основе обращения клиента
+                    @else
+                        Добавление нового заказа в систему
+                    @endif
+                </p>
+                @if(session('contact_data'))
+                    <div class="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <p class="text-sm text-green-700">
+                            <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Форма предзаполнена данными из обращения клиента. Проверьте и дополните информацию.
+                        </p>
+                    </div>
+                @endif
             </div>
-            <a href="{{ route('admin.orders.index') }}" 
-               class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
-                Назад к списку
-            </a>
+            <div class="flex gap-3">
+                @if(session('contact_data'))
+                    <a href="{{ route('admin.contacts.show', session('contact_data.source_contact_id')) }}" 
+                       class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                        К обращению
+                    </a>
+                @endif
+                <a href="{{ route('admin.orders.index') }}" 
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
+                    Назад к списку
+                </a>
+            </div>
         </div>
     </div>
 
@@ -70,7 +94,7 @@
                             <input type="text" 
                                    name="client_name" 
                                    id="client_name"
-                                   value="{{ old('client_name') }}"
+                                   value="{{ old('client_name', session('contact_data.client_name')) }}"
                                    required
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('client_name') border-red-500 @enderror">
                             @error('client_name')
@@ -85,7 +109,7 @@
                             <input type="email" 
                                    name="client_email" 
                                    id="client_email"
-                                   value="{{ old('client_email') }}"
+                                   value="{{ old('client_email', session('contact_data.client_email')) }}"
                                    required
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('client_email') border-red-500 @enderror">
                             @error('client_email')
@@ -100,7 +124,7 @@
                             <input type="tel" 
                                    name="client_phone" 
                                    id="client_phone"
-                                   value="{{ old('client_phone') }}"
+                                   value="{{ old('client_phone', session('contact_data.client_phone')) }}"
                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('client_phone') border-red-500 @enderror">
                             @error('client_phone')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -148,7 +172,7 @@
                                       rows="4"
                                       required
                                       placeholder="Подробное описание того, что нужно сделать..."
-                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('description') border-red-500 @enderror">{{ old('description') }}</textarea>
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 @error('description') border-red-500 @enderror">{{ old('description', session('contact_data.description')) }}</textarea>
                             @error('description')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
