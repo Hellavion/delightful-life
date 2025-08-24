@@ -3,27 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты - Delightful Life</title>
+    <title>Контакты - {{ $settings->site_name ?? 'Художественная студия' }}</title>
+    
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/instrument-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/fonts/instrument-sans.css" rel="stylesheet">
+    <meta name="description" content="Связь с {{ $settings->artist_name ?? 'художником' }}. {{ $settings->site_description ?? 'Контактная информация, заказы, консультации.' }}">
+    <meta name="keywords" content="{{ setting('meta_keywords', 'контакты, связь, художник, заказ') }}">
+    <meta name="author" content="{{ $settings->artist_name ?? setting('meta_author', 'Художник') }}">
+    
+    @if(setting('google_analytics'))
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ setting('google_analytics') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ setting('google_analytics') }}');
+    </script>
+    @endif
+    
+    @if(setting('yandex_metrica'))
+    <!-- Яндекс.Метрика -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym({{ setting('yandex_metrica') }}, "init", {clickmap:true,trackLinks:true,accurateTrackBounce:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/{{ setting('yandex_metrica') }}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-6">
-                <h1 class="text-3xl font-bold text-gray-900">Delightful Life</h1>
-                <nav class="space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Главная</a>
-                    <a href="{{ route('portfolio.index') }}" class="text-gray-700 hover:text-indigo-600">Портфолио</a>
-                    <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-indigo-600">Услуги</a>
-                    <a href="{{ route('news.index') }}" class="text-gray-700 hover:text-indigo-600">Новости</a>
-                    <a href="{{ route('contact.index') }}" class="text-indigo-600 font-semibold">Контакты</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <x-site-header current-route="contact.index" />
 
-    <main class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <h1 class="text-4xl font-bold text-center mb-12">Свяжитесь со мной</h1>
             
             @if(session('success'))
@@ -142,7 +160,13 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-lg font-medium text-gray-900">Email</p>
+                                    @if($settings->contact_email)
+                                    <a href="mailto:{{ $settings->contact_email }}" class="text-gray-600 hover:text-indigo-600">
+                                        {{ $settings->contact_email }}
+                                    </a>
+                                    @else
                                     <p class="text-gray-600">hello@delightful-life.com</p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -154,7 +178,13 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-lg font-medium text-gray-900">Телефон</p>
+                                    @if($settings->contact_phone)
+                                    <a href="tel:{{ $settings->contact_phone }}" class="text-gray-600 hover:text-indigo-600">
+                                        {{ $settings->contact_phone }}
+                                    </a>
+                                    @else
                                     <p class="text-gray-600">+7 (999) 123-45-67</p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -166,7 +196,7 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-lg font-medium text-gray-900">Время работы</p>
-                                    <p class="text-gray-600">Пн-Пт: 10:00 - 19:00<br>Сб-Вс: 12:00 - 17:00</p>
+                                    <p class="text-gray-600">{{ setting('working_hours', 'Пн-Пт: 10:00 - 19:00, Сб-Вс: 12:00 - 17:00') }}</p>
                                 </div>
                             </div>
 
@@ -179,7 +209,10 @@
                                 </div>
                                 <div class="ml-3">
                                     <p class="text-lg font-medium text-gray-900">Студия</p>
-                                    <p class="text-gray-600">г. Москва<br>Встречи по предварительной записи</p>
+                                    <p class="text-gray-600">
+                                        {{ setting('contact_address', 'г. Москва') }}<br>
+                                        Встречи по предварительной записи
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -188,24 +221,38 @@
                     <div class="bg-white p-8 rounded-lg shadow">
                         <h3 class="text-xl font-bold mb-4">Социальные сети</h3>
                         <div class="flex space-x-4">
-                            <a href="#" class="text-gray-400 hover:text-indigo-600 transition">
+                            @if($settings->social_instagram)
+                            <a href="{{ $settings->social_instagram }}" target="_blank" class="text-gray-400 hover:text-indigo-600 transition">
                                 <span class="sr-only">Instagram</span>
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987s11.987-5.367 11.987-11.987C24.004 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.326-1.297L3.905 14.41c-.49-.653-.49-1.569 0-2.222l1.218-1.281c.878-.807 2.029-1.297 3.326-1.297.653 0 1.281.163 1.828.49L12 11.823l1.723-1.723c.547-.327 1.175-.49 1.828-.49 1.297 0 2.448.49 3.326 1.297l1.218 1.281c.49.653.49 1.569 0 2.222l-1.218 1.281c-.878.807-2.029 1.297-3.326 1.297-.653 0-1.281-.163-1.828-.49L12 13.175l-1.723 1.723c-.547.327-1.175.49-1.828.49z"/>
                                 </svg>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-600 transition">
+                            @endif
+                            @if($settings->social_telegram)
+                            <a href="{{ $settings->social_telegram }}" target="_blank" class="text-gray-400 hover:text-indigo-600 transition">
                                 <span class="sr-only">Telegram</span>
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                                 </svg>
                             </a>
-                            <a href="#" class="text-gray-400 hover:text-indigo-600 transition">
+                            @endif
+                            @if($settings->social_behance)
+                            <a href="{{ $settings->social_behance }}" target="_blank" class="text-gray-400 hover:text-indigo-600 transition">
                                 <span class="sr-only">Behance</span>
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M0 7.5v9c0 .828.672 1.5 1.5 1.5h21c.828 0 1.5-.672 1.5-1.5v-9c0-.828-.672-1.5-1.5-1.5h-21C.672 6 0 6.672 0 7.5zM15.5 10h3v1h-3v-1zm-5.25 2.5c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25S9 14.44 9 13.75s.56-1.25 1.25-1.25zM5.25 9c.966 0 1.75.784 1.75 1.75S6.216 12.5 5.25 12.5 3.5 11.716 3.5 10.75 4.284 9 5.25 9z"/>
                                 </svg>
                             </a>
+                            @endif
+                            @if($settings->social_vk)
+                            <a href="{{ $settings->social_vk }}" target="_blank" class="text-gray-400 hover:text-indigo-600 transition">
+                                <span class="sr-only">ВКонтакте</span>
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.131-.427.131-.427s-.019-1.306.587-1.499c.6-.191 1.369.95 2.184 1.369.615.317 1.083.247 1.083.247l2.178-.031s1.14-.071.599-1.016c-.044-.077-.312-.657-1.608-1.855-1.361-1.257-1.179-.953.46-2.92 1-1.201 1.4-1.934 1.275-2.249-.119-.301-.851-.221-.851-.221l-2.449.015s-.182-.025-.316.056-.218.186-.218.186-.414.11-.725.157c-1.85.282-3.144-1.287-3.144-1.287s-1.464-2.274-1.384-4.11c.036-.827.423-1.253-.096-1.253-.65 0-1.735.924-1.735.924L6 6.417s-.269.043-.368.201c-.09.143-.007.44-.007.44s1.963 4.589 4.182 6.904c2.034 2.121 4.342 1.982 4.342 1.982.338-.024.626-.158.626-.158z"/>
+                                </svg>
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -213,10 +260,6 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; {{ date('Y') }} Delightful Life. Все права защищены.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>

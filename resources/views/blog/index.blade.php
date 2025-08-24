@@ -6,7 +6,7 @@
     <title>Новости - Delightful Life</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 min-h-screen flex flex-col">
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-6">
@@ -22,7 +22,7 @@
         </div>
     </header>
 
-    <main class="py-12">
+    <main class="py-12 flex-grow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-4xl font-bold text-center mb-12">Новости и события</h1>
             
@@ -118,10 +118,6 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; {{ date('Y') }} Delightful Life. Все права защищены.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>

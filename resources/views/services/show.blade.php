@@ -4,26 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $service->name }} - Delightful Life</title>
+    
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/instrument-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/fonts/instrument-sans.css" rel="stylesheet">
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-6">
-                <h1 class="text-3xl font-bold text-gray-900">Delightful Life</h1>
-                <nav class="space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Главная</a>
-                    <a href="{{ route('portfolio.index') }}" class="text-gray-700 hover:text-indigo-600">Портфолио</a>
-                    <a href="{{ route('services.index') }}" class="text-indigo-600 font-semibold">Услуги</a>
-                    <a href="{{ route('news.index') }}" class="text-gray-700 hover:text-indigo-600">Новости</a>
-                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-indigo-600">Контакты</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <x-site-header current-route="services.show" />
 
-    <main class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <!-- Хлебные крошки -->
             <nav class="mb-8">
                 <ol class="flex items-center space-x-2 text-sm text-gray-600">
@@ -216,10 +210,6 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; {{ date('Y') }} Delightful Life. Все права защищены.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>

@@ -4,28 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $artwork->title }} - Портфолио - Delightful Life</title>
+    
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/instrument-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/fonts/instrument-sans.css" rel="stylesheet">
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-6">
-                <h1 class="text-3xl font-bold text-gray-900">Delightful Life</h1>
-                <nav class="space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Главная</a>
-                    <a href="{{ route('portfolio.index') }}" class="text-indigo-600 font-semibold">Портфолио</a>
-                    <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-indigo-600">Услуги</a>
-                    <a href="{{ route('news.index') }}" class="text-gray-700 hover:text-indigo-600">Новости</a>
-                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-indigo-600">Контакты</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <x-site-header current-route="portfolio.show" />
 
-    <main class="py-12">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <!-- Breadcrumb -->
-            <nav class="mb-8">
+            <nav class="mb-6 sm:mb-8">
                 <ol class="flex items-center space-x-2 text-sm text-gray-600">
                     <li><a href="{{ route('home') }}" class="hover:text-indigo-600">Главная</a></li>
                     <li>/</li>
@@ -38,9 +32,9 @@
             <div class="bg-white rounded-lg shadow overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2">
                     <!-- Изображение -->
-                    <div class="bg-gray-200 aspect-square lg:aspect-auto lg:h-96 xl:h-[600px]">
+                    <div class="bg-gray-200 aspect-square lg:aspect-auto lg:h-96 xl:h-[600px] order-1 lg:order-1">
                         @if($artwork->image_path)
-                            <img src="{{ Storage::url($artwork->image_path) }}" 
+                            <img src="{{ asset('storage/' . $artwork->image_path) }}" 
                                  alt="{{ $artwork->title }}" 
                                  class="w-full h-full object-cover">
                         @else
@@ -51,8 +45,8 @@
                     </div>
 
                     <!-- Информация -->
-                    <div class="p-8">
-                        <h1 class="text-3xl font-bold text-gray-900 mb-4">{{ $artwork->title }}</h1>
+                    <div class="p-4 sm:p-6 lg:p-8 order-2 lg:order-2">
+                        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{{ $artwork->title }}</h1>
                         
                         @if($artwork->description)
                             <p class="text-gray-700 mb-6 leading-relaxed">{{ $artwork->description }}</p>
@@ -116,15 +110,15 @@
 
             <!-- Похожие работы -->
             @if($relatedArtworks->count() > 0)
-                <div class="mt-16">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-8">Похожие работы</h2>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="mt-12 sm:mt-16">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8">Похожие работы</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
                         @foreach($relatedArtworks as $relatedArtwork)
                             <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition">
-                                <a href="{{ route('portfolio.show', $relatedArtwork->slug) }}">
+                                <a href="{{ route('portfolio.show', $relatedArtwork) }}">
                                     <div class="h-48 bg-gray-200">
                                         @if($relatedArtwork->image_path)
-                                            <img src="{{ Storage::url($relatedArtwork->image_path) }}" 
+                                            <img src="{{ asset('storage/' . $relatedArtwork->image_path) }}" 
                                                  alt="{{ $relatedArtwork->title }}" 
                                                  class="w-full h-full object-cover">
                                         @else
@@ -150,10 +144,6 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; {{ date('Y') }} Delightful Life. Все права защищены.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>
