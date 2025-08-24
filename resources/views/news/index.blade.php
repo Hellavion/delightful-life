@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Новости - {{ $settings->site_name ?? 'Художественная студия' }}</title>
+    
+    <!-- Font preloading -->
+    <link rel="preload" href="/fonts/instrument-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/instrument-sans-latin-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link href="/fonts/instrument-sans.css" rel="stylesheet">
     <meta name="description" content="Новости и события {{ $settings->artist_name ?? 'художника' }}. {{ $settings->site_description ?? 'Свежие новости, выставки, события.' }}">
     <meta name="keywords" content="{{ setting('meta_keywords', 'новости, художник, выставки, события') }}">
     <meta name="author" content="{{ $settings->artist_name ?? setting('meta_author', 'Художник') }}">
@@ -31,24 +37,11 @@
     @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50">
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-6">
-                <h1 class="text-3xl font-bold text-gray-900">{{ $settings->site_name ?? 'Художественная студия' }}</h1>
-                <nav class="space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Главная</a>
-                    <a href="{{ route('portfolio.index') }}" class="text-gray-700 hover:text-indigo-600">Портфолио</a>
-                    <a href="{{ route('services.index') }}" class="text-gray-700 hover:text-indigo-600">Услуги</a>
-                    <a href="{{ route('news.index') }}" class="text-indigo-600 font-semibold">Новости</a>
-                    <a href="{{ route('contact.index') }}" class="text-gray-700 hover:text-indigo-600">Контакты</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <x-site-header current-route="news.index" />
 
-    <main class="py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <h1 class="text-4xl font-bold text-center mb-12">Новости и события</h1>
             
             <!-- Поиск -->
@@ -143,10 +136,6 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; {{ date('Y') }} {{ $settings->site_name ?? 'Художественная студия' }}. Все права защищены.</p>
-        </div>
-    </footer>
+    <x-site-footer />
 </body>
 </html>
